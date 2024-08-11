@@ -23,9 +23,7 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = Optional.ofNullable(jwtTokenProvider.resolveToken(request));
         try {
-            token.ifPresent(s -> {
-                SecurityContextHolder.getContext().setAuthentication(jwtTokenProvider.getAuthentication(s));
-            });
+            token.ifPresent(s -> SecurityContextHolder.getContext().setAuthentication(jwtTokenProvider.getAuthentication(s)));
 
             filterChain.doFilter(request, response);
         } catch (Exception ex) {
