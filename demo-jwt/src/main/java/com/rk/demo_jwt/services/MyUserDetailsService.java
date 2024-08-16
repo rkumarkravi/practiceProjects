@@ -1,16 +1,19 @@
 package com.rk.demo_jwt.services;
 
 import com.rk.demo_jwt.models.DemoUser;
+import com.rk.demo_jwt.models.mongo.WeatherObsMongoEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -22,7 +25,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public DemoUser loadUserByUsername(String username) throws UsernameNotFoundException {
-//        log.info("username is:: {}",username);
+        StopWatch stopWatch=new StopWatch("loadUserByUsername");
+        stopWatch.start();
+        //        log.info("username is:: {}",username);
+        try{
         var users = userList.stream()
                 .filter(x -> x.getUsername().equals(username))
                 .toList();
@@ -31,6 +37,9 @@ public class MyUserDetailsService implements UserDetailsService {
             return users.get(0);
         } else {
             throw new UsernameNotFoundException("Invalid Credentials!");
+        }}finally {
+            stopWatch.stop();
+            log.info(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
         }
     }
 
@@ -44,4 +53,6 @@ public class MyUserDetailsService implements UserDetailsService {
         throw new Exception("User already exists!");
 
     }
+
+
 }
