@@ -29,7 +29,10 @@ public class SessionCheckFilter implements Filter {
 
         boolean checkSessionLogic=true;
 
-        if(httpRequest.getServletPath().endsWith("/") || httpRequest.getServletPath().endsWith("/login")) {
+        if(httpRequest.getServletPath().endsWith("/")
+                || httpRequest.getServletPath().endsWith("/login")
+                || httpRequest.getServletPath().endsWith("/sessionExp")
+        ) {
             System.out.println(httpRequest.getServletPath());
             checkSessionLogic=false;
         }
