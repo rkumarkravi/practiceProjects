@@ -4,13 +4,16 @@ import com.rkumarkravi.shopkro.entities.Seller;
 import com.rkumarkravi.shopkro.repositories.SellerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @Transactional
-public class SellerService {
+public class SellerService implements UserDetailsService {
     @Autowired
     private SellerRepository sellerRepository;
 
@@ -38,5 +41,10 @@ public class SellerService {
 
     public void deleteSeller(Long id) {
         sellerRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return sellerRepository.findById(Long.parseLong(username)).get();
     }
 }

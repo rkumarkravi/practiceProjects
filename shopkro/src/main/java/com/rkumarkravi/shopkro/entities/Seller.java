@@ -1,10 +1,16 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Seller {
+public class Seller implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +64,7 @@ public class Seller {
     @OneToMany(mappedBy = "seller", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     @ToString.Exclude // Lombok annotation to set a default value for the field in the builder
+    @JsonManagedReference
     private Set<Product> products = new LinkedHashSet<>();
     @Column(name = "pwd", length = 255)
     private String password;
@@ -70,5 +77,15 @@ public class Seller {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return String.valueOf(this.id);
     }
 }

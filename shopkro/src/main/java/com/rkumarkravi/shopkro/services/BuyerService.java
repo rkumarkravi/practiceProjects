@@ -3,12 +3,15 @@ package com.rkumarkravi.shopkro.services;
 import com.rkumarkravi.shopkro.entities.Buyer;
 import com.rkumarkravi.shopkro.repositories.BuyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BuyerService {
+public class BuyerService implements UserDetailsService {
     @Autowired
     private BuyerRepository buyerRepository;
 
@@ -36,6 +39,12 @@ public class BuyerService {
 
     public void deleteBuyer(Long id) {
         buyerRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
+        return buyerRepository.findById(Long.parseLong(username)).get();
     }
 }
 

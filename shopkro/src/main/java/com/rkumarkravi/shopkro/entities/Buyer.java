@@ -6,9 +6,13 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -21,7 +25,7 @@ import java.util.Set;
         @Index(name = "idx_buyer_email", columnList = "email"),
         @Index(name = "idx_buyer_mobNo", columnList = "mobNo")
 })
-public class   Buyer {
+public class Buyer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "buyer_id", nullable = false)
@@ -74,5 +78,15 @@ public class   Buyer {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return String.valueOf(this.id);
     }
 }

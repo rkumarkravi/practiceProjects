@@ -1,5 +1,6 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,8 +59,10 @@ public class Product {
     @Column(name = "exp_date")
     private LocalDate expDate;
 
-    @Column(name = "category", length = 100)
-    private String category; // e.g., Electronics, Clothing, etc.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", nullable = false) // Foreign key to Category
+    @JsonBackReference
+    private Category category;
 
     @Column(name = "sku", unique = true, length = 50)
     private String sku; // Stock Keeping Unit, unique identifier for products
@@ -81,6 +84,7 @@ public class Product {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
+    @JsonBackReference
     private Seller seller;
 
     @PrePersist
