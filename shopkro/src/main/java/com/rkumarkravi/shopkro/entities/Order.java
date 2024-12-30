@@ -1,5 +1,6 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -73,6 +74,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
+    @JsonBackReference
     private Buyer buyer; // Buyer associated with the order
 
     @PrePersist

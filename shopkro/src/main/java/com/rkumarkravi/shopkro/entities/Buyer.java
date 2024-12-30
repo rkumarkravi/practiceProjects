@@ -1,5 +1,6 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,9 +63,11 @@ public class Buyer implements UserDetails {
     private String updatedBy;
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("buyerParent")
     private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("orderParent")
     private Set<Order> orders = new LinkedHashSet<>();
 
     @Column(name = "pwd", length = 255)

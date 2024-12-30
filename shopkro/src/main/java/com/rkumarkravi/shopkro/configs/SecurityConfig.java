@@ -63,7 +63,7 @@ public class SecurityConfig {
                 httpSecurity.cors(AbstractHttpConfigurer::disable)
                         .csrf(AbstractHttpConfigurer::disable)
                         .authorizeHttpRequests(a -> {
-                            a.requestMatchers("/auth/**")
+                            a.requestMatchers("/auth/**","/api/buyer/create","/api/seller/create")
                                     .permitAll().anyRequest().authenticated();
                         }).authenticationProvider(buyerAuthenticationProvider())
                         .authenticationProvider(sellerAuthenticationProvider())

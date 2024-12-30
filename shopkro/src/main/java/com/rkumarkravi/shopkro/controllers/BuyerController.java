@@ -25,6 +25,7 @@ public class BuyerController {
     }
 
     @PostMapping("/create")
+    @CrossOrigin(originPatterns = "*")
     public Buyer createBuyer(@RequestBody Buyer buyer) {
         return buyerService.createBuyer(buyer);
     }

@@ -61,6 +61,9 @@ public class Seller implements UserDetails {
     @Column(name = "updated_by", length = 50)
     private String updatedBy;
 
+    @Column(name = "gender", length = 10)
+    private String gender;
+
     @OneToMany(mappedBy = "seller", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     @ToString.Exclude // Lombok annotation to set a default value for the field in the builder
