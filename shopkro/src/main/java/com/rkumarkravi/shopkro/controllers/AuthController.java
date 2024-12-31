@@ -70,6 +70,7 @@ public class AuthController {
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         var password="";
         var id=0L;
+        Object userInfo=null;
         if("BUYER".equals(loginRequest.getType())) {
             // Find user by email
             Optional<Buyer> userOptional = buyerRepository.findByEmailIgnoreCase(loginRequest.getEmail());
@@ -80,6 +81,7 @@ public class AuthController {
             Buyer user = userOptional.get();
             password = user.getPassword();
             id= user.getId();
+            userInfo=user;
         }else {
             Optional<Seller> userOptional = sellerRepository.findByEmailIgnoreCase(loginRequest.getEmail());
             if (userOptional.isEmpty()) {
@@ -89,6 +91,7 @@ public class AuthController {
             Seller user = userOptional.get();
             password = user.getPassword();
             id= user.getId();
+            userInfo=user;
         }
         // Check if password matches
         /*if (!passwordEncoder.matches(loginRequest.getPassword(), password)) {
@@ -102,6 +105,6 @@ public class AuthController {
 
         // Generate JWT token
         String token = jwtUtil.createToken(String.valueOf(id),loginRequest.getType());
-        return ResponseEntity.ok(new LoginResponse(token));
+        return ResponseEntity.ok(new LoginResponse(token,userInfo,loginRequest.getType()));
     }
 }

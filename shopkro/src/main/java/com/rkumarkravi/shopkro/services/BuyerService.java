@@ -30,7 +30,7 @@ public class BuyerService implements UserDetailsService {
 
     public Buyer updateBuyer(Long id, Buyer updatedBuyer) {
         Buyer buyer = getBuyerById(id);
-        buyer.setBuyerName(updatedBuyer.getBuyerName());
+        buyer.setName(updatedBuyer.getName());
         buyer.setEmail(updatedBuyer.getEmail());
         buyer.setGender(updatedBuyer.getGender());
         buyer.setMobNo(updatedBuyer.getMobNo());

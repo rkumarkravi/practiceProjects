@@ -37,7 +37,7 @@ public class Buyer implements UserDetails {
     private Long id;
 
     @Column(name = "buyer_name", nullable = false, length = 100)
-    private String buyerName;
+    private String name;
 
     @Column(name = "gender", length = 10)
     private String gender;

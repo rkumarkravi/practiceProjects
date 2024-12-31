@@ -1,6 +1,7 @@
 package com.rkumarkravi.shopkro.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -35,7 +36,7 @@ public class Seller implements UserDetails {
     private Long id;
 
     @Column(name = "seller_name", nullable = false, length = 100)
-    private String sellerName;
+    private String name;
 
     @Column(name = "seller_address", length = 255)
     private String sellerAddress;
@@ -73,7 +74,8 @@ public class Seller implements UserDetails {
     private Set<Product> products = new LinkedHashSet<>();
 
     @Column(name = "pwd", length = 255)
-    private transient String password;
+    @JsonIgnore
+    private String password;
 
     @PrePersist
     protected void onCreate() {

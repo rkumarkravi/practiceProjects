@@ -33,7 +33,7 @@ public class SellerService implements UserDetailsService {
 
     public Seller updateSeller(Long id, Seller updatedSeller) {
         Seller seller = getSellerById(id);
-        seller.setSellerName(updatedSeller.getSellerName());
+        seller.setName(updatedSeller.getName());
         seller.setSellerAddress(updatedSeller.getSellerAddress());
         seller.setSellerGst(updatedSeller.getSellerGst());
         return sellerRepository.save(seller);
