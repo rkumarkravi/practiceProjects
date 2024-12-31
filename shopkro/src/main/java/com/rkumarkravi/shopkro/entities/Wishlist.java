@@ -1,6 +1,8 @@
 package com.rkumarkravi.shopkro.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,7 @@ import java.util.Set;
 @Table(name = "ECOMM_wishlist", indexes = {
         @Index(name = "idx_wishlist_buyer_id", columnList = "buyer_id")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Wishlist {
 
     @Id

@@ -1,5 +1,7 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_shipment_order_id", columnList = "order_id"),
         @Index(name = "idx_shipment_status", columnList = "status")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Shipment {
 
     @Id

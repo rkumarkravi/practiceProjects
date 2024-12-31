@@ -1,6 +1,8 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +26,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Seller implements UserDetails {
 
     @Id
@@ -67,13 +70,15 @@ public class Seller implements UserDetails {
     @OneToMany(mappedBy = "seller", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     @ToString.Exclude // Lombok annotation to set a default value for the field in the builder
-    @JsonManagedReference
     private Set<Product> products = new LinkedHashSet<>();
+
     @Column(name = "pwd", length = 255)
-    private String password;
+    private transient String password;
 
     @PrePersist
     protected void onCreate() {
+        this.status="ACTIVE";
+        this.createdBy="SYSTEM";
         this.createdAt = LocalDateTime.now();
     }
 

@@ -63,8 +63,8 @@ public class SecurityConfig {
                 httpSecurity.cors(AbstractHttpConfigurer::disable)
                         .csrf(AbstractHttpConfigurer::disable)
                         .authorizeHttpRequests(a -> {
-                            a.requestMatchers("/auth/**","/api/buyer/create","/api/seller/create")
-                                    .permitAll().anyRequest().authenticated();
+                            a.requestMatchers("/auth/**", "/api/buyer/create", "/api/seller/create").permitAll()
+                                    .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
                         }).authenticationProvider(buyerAuthenticationProvider())
                         .authenticationProvider(sellerAuthenticationProvider())
                         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).build();

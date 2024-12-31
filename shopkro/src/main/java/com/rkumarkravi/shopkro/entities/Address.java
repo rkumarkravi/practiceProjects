@@ -1,6 +1,8 @@
 package com.rkumarkravi.shopkro.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +24,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_address_state", columnList = "state"),
         @Index(name = "idx_address_pinCode", columnList = "pinCode")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Address {
 
     @Id
@@ -73,7 +76,6 @@ public class Address {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
-    @JsonBackReference
     private Buyer buyer; // Buyer associated with this address
 
     @PrePersist

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Table(name = "ECOMM_CATEGORY")
 @Getter
 @Setter
+@ToString
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generated primary key
@@ -27,8 +29,7 @@ public class Category {
     @Column(name = "STATUS", nullable = false, length = 20)
     private String status; // ACTIVE, INACTIVE, etc.
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Product> products = new HashSet<>(); // Relationship with Product
+//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Product> products = new HashSet<>(); // Relationship with Product
 
 }

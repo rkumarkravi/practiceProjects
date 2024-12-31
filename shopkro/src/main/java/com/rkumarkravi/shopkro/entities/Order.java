@@ -1,22 +1,19 @@
 package com.rkumarkravi.shopkro.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.RequiredArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -29,6 +26,7 @@ import java.util.Set;
         @Index(name = "idx_order_state", columnList = "stateId"),
         @Index(name = "idx_buyer_id", columnList = "buyer_id")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +72,6 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
-    @JsonBackReference
     private Buyer buyer; // Buyer associated with the order
 
     @PrePersist

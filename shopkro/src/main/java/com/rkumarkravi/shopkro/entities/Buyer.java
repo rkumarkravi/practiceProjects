@@ -1,6 +1,9 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +29,7 @@ import java.util.Set;
         @Index(name = "idx_buyer_email", columnList = "email"),
         @Index(name = "idx_buyer_mobNo", columnList = "mobNo")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Buyer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,18 +67,19 @@ public class Buyer implements UserDetails {
     private String updatedBy;
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("buyerParent")
     private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("orderParent")
     private Set<Order> orders = new LinkedHashSet<>();
 
     @Column(name = "pwd", length = 255)
+    @JsonIgnore
     private String password;
 
     @PrePersist
     protected void onCreate() {
+        this.status="ACTIVE";
+        this.createdBy="SYSTEM";
         this.createdAt = LocalDateTime.now();
     }
 

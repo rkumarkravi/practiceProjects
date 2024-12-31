@@ -1,23 +1,26 @@
 package com.rkumarkravi.shopkro.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,6 +29,8 @@ import java.time.LocalDateTime;
         @Index(name = "idx_product_name", columnList = "name"),
         @Index(name = "idx_seller_id", columnList = "seller_id")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,9 +64,9 @@ public class Product {
     @Column(name = "exp_date")
     private LocalDate expDate;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false) // Foreign key to Category
-    @JsonBackReference
     private Category category;
 
     @Column(name = "sku", unique = true, length = 50)
@@ -70,9 +75,11 @@ public class Product {
     @Column(name = "status", nullable = false, length = 20)
     private String status; // ACTIVE, OUT_OF_STOCK, DISCONTINUED, etc.
 
+    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
@@ -89,11 +96,11 @@ public class Product {
 
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
+
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+
     }
 }
