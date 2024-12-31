@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingCart, FaBox, FaUser, FaSignOutAlt } from "react-icons/fa"; // Importing icons
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
 function Navbar() {
   const navigate = useNavigate();
   const profile = useSelector((state) => state.global.globalState.profile);
@@ -12,6 +12,11 @@ function Navbar() {
     localStorage.clear();
     navigate("/");
   };
+
+
+  useEffect(()=>{
+    toast(`Welcome ${profile.name} !`);
+  },[])
 
   return (
     <>
