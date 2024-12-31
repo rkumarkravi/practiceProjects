@@ -44,7 +44,7 @@ const LoginPage = () => {
       navigate("/dashboard"); // Redirect to login page after login
     } catch (err) {
       // Handle error
-      toast("Login failed:" + (err.response?.data || err.message));
+      toast("Login failed : " + (err.response?.data || err.message));
       console.error("Login failed:", err.response?.data || err.message);
     }
   };

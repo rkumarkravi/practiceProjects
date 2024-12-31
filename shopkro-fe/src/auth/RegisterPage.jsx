@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../services/AxiosService";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 const RegistrationPage = () => {
   const [isBuyer, setIsBuyer] = useState(true);
