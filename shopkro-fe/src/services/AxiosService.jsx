@@ -1,4 +1,5 @@
 import axios from "axios";
+import { store } from "../store/store";
 
 
 // Create an Axios instance with a base URL
@@ -13,9 +14,9 @@ const axiosInstance = axios.create({
 // Add a request interceptor (optional, e.g., to add authorization headers)
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log(config)
+    // console.log(config)
     // You can modify the request before it's sent (e.g., attach a token)
-    const token = localStorage.getItem('t'); // Example: Get token from local storage
+    let token = store.getState().token || localStorage.getItem('t');
     if (token && !(config.url==="/auth/login" || config.url.includes("/auth/register"))) {
       config.headers.Authorization = `Bearer ${token}`;
     }
