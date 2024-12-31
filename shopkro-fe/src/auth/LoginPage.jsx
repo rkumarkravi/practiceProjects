@@ -1,7 +1,40 @@
 import React, { useState } from 'react';
-
+import axiosInstance from '../services/AxiosService';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const [isBuyer, setIsBuyer] = useState(true);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log(e.target)
+    try {
+      const formData={};
+      for(let i=0;i<e.target.length;i++){
+        if(e.target[i].name){
+          console.log(e.target[i].name,e.target[i].value);
+          formData[e.target[i].name]=e.target[i].value;
+        }
+      }
+      formData.type=isBuyer?'BUYER':'SELLER';
+      console.log(formData)
+      // Call the backend registration API
+      const response = await axiosInstance.post(`/auth/login`, formData);
+
+      // Handle success
+      console.log('Login successful:', response);
+      if(response.status===200){
+        localStorage.setItem("t",response.data.token);
+        localStorage.setItem("tkn",uuidv4());
+        localStorage.setItem("auth","eyJhbG"+uuidv4().replaceAll("-","")+uuidv4().replaceAll("-",""));
+      }
+      navigate('/dashboard'); // Redirect to login page after login
+    } catch (err) {
+      // Handle error
+      console.error('Registration failed:', err.response?.data || err.message);
+    }
+  };
 
   return (
     <div className="bg-CF4EDD3 min-h-screen flex">
@@ -38,7 +71,7 @@ const LoginPage = () => {
         </div>
 
         {/* Buyer/Seller Form */}
-        <form className="w-full">
+        <form className="w-full" onSubmit={handleLogin}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-C4C585B mb-2">
               Email
@@ -46,6 +79,7 @@ const LoginPage = () => {
             <input
               type="email"
               id="email"
+              name="email"
               className="w-full px-4 py-2 border rounded-lg text-C7E99A3 focus:ring-C7E99A3 focus:border-C7E99A3"
               placeholder="Enter your email"
             />
@@ -57,6 +91,7 @@ const LoginPage = () => {
             <input
               type="password"
               id="password"
+              name="password"
               className="w-full px-4 py-2 border rounded-lg text-C7E99A3 focus:ring-C7E99A3 focus:border-C7E99A3"
               placeholder="Enter your password"
             />

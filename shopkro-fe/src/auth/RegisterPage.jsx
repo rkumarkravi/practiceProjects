@@ -10,7 +10,7 @@ const RegistrationPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
-
+    console.log(e.target)
     try {
       const formData={};
       for(let i=0;i<e.target.length;i++){
@@ -25,7 +25,7 @@ const RegistrationPage = () => {
 
       // Handle success
       console.log('Registration successful:', response.data);
-      // navigate('/login'); // Redirect to login page after registration
+      navigate('/login'); // Redirect to login page after registration
     } catch (err) {
       // Handle error
       console.error('Registration failed:', err.response?.data || err.message);
@@ -145,6 +145,21 @@ const RegistrationPage = () => {
                   placeholder="Enter your mobile number"
                 />
               </div>
+              <div className="mb-4">
+                <label htmlFor="gender" className="block text-C4C585B mb-2">
+                  Gender
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  className="w-full px-4 py-2 border rounded-lg text-C4C585B focus:ring-C7E99A3 focus:border-C7E99A3"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
               <button
                 type="submit"
                 className="w-full bg-C7E99A3 text-white py-2 rounded-lg hover:bg-C4C585B"
@@ -241,6 +256,21 @@ const RegistrationPage = () => {
                   className="w-full px-4 py-2 border rounded-lg text-C7E99A3 focus:ring-C7E99A3 focus:border-C7E99A3"
                   placeholder="Enter your phone number"
                 />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="gender" className="block text-C4C585B mb-2">
+                  Gender
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  className="w-full px-4 py-2 border rounded-lg text-C4C585B focus:ring-C7E99A3 focus:border-C7E99A3"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
               <button
                 type="submit"
