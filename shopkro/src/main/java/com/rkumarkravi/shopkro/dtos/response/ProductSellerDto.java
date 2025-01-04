@@ -1,14 +1,12 @@
 package com.rkumarkravi.shopkro.dtos.response;
 
 import lombok.*;
-import java.util.*;
-import java.time.*;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SellerDto {
+public class ProductSellerDto {
 
     private Long id;
     private String sellerName;

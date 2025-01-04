@@ -36,7 +36,7 @@ const RegistrationPage = () => {
       setError(
         err.response?.data?.message || "Registration failed. Please try again."
       );
-      toast("Registration failed:" + (err.response?.data || err.message));
+      toast("Registration failed : " + (err.response?.data || err.message));
     }
   };
 

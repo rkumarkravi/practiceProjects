@@ -1,10 +1,14 @@
 package com.rkumarkravi.shopkro.utils;
 
+import org.modelmapper.ModelMapper;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
 public class Utils {
+
+    public static final ModelMapper MODEL_MAPPER=new ModelMapper();
 
     // Custom ID generation logic
     public static String generateCustomId(String stateId) {

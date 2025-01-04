@@ -1,6 +1,7 @@
 package com.rkumarkravi.shopkro.controllers;
 
 import com.rkumarkravi.shopkro.dtos.request.LoginRequest;
+import com.rkumarkravi.shopkro.dtos.response.AuthBuyerDto;
 import com.rkumarkravi.shopkro.dtos.response.LoginResponse;
 import com.rkumarkravi.shopkro.entities.Buyer;
 import com.rkumarkravi.shopkro.entities.Seller;
@@ -14,6 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
+import static com.rkumarkravi.shopkro.utils.Utils.MODEL_MAPPER;
 
 @RestController
 @RequestMapping("/auth")
@@ -81,7 +84,7 @@ public class AuthController {
             Buyer user = userOptional.get();
             password = user.getPassword();
             id= user.getId();
-            userInfo=user;
+            userInfo= MODEL_MAPPER.map(user, AuthBuyerDto.class);
         }else {
             Optional<Seller> userOptional = sellerRepository.findByEmailIgnoreCase(loginRequest.getEmail());
             if (userOptional.isEmpty()) {

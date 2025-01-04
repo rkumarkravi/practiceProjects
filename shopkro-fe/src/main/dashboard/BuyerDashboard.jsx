@@ -36,7 +36,7 @@ const BuyerDashboard = () => {
             {products.map((product) => (
               <div
                 key={product.id}
-                className="bg-white p-4 rounded-lg shadow-md"
+                className="bg-white p-4 rounded-md shadow-md"
               >
                 <img
                   src={product.imageUrl}

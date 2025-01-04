@@ -27,6 +27,6 @@ public class ProductDto {
     private LocalDateTime updatedAt;
     private String createdBy;
     private String updatedBy;
-    private SellerDto seller;
+    private ProductSellerDto seller;
 
 }
