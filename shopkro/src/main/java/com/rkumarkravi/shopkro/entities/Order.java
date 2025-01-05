@@ -1,6 +1,8 @@
 package com.rkumarkravi.shopkro.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -68,10 +70,12 @@ public class Order {
     @JoinTable(name = "ECOMM_ORDER_PRODUCTS",
             joinColumns = @JoinColumn(name = "order_order_id"),
             inverseJoinColumns = @JoinColumn(name = "products_product_id"))
+    @JsonManagedReference("order-products")
     private Set<Product> products = new LinkedHashSet<>(); // Products associated with the order
 
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
+    @JsonBackReference("buyer-orders")
     private Buyer buyer; // Buyer associated with the order
 
     @PrePersist

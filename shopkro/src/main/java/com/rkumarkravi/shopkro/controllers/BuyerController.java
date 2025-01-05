@@ -1,5 +1,6 @@
 package com.rkumarkravi.shopkro.controllers;
 
+import com.rkumarkravi.shopkro.dtos.request.ProfileBuyerDto;
 import com.rkumarkravi.shopkro.entities.Buyer;
 import com.rkumarkravi.shopkro.services.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class BuyerController {
     }
 
     @PutMapping("/{id}/update")
-    public Buyer updateBuyer(@PathVariable Long id, @RequestBody Buyer buyer) {
+    public Buyer updateBuyer(@PathVariable Long id, @RequestBody ProfileBuyerDto buyer) {
         return buyerService.updateBuyer(id, buyer);
     }
 

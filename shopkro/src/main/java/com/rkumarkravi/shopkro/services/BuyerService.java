@@ -1,5 +1,6 @@
 package com.rkumarkravi.shopkro.services;
 
+import com.rkumarkravi.shopkro.dtos.request.ProfileBuyerDto;
 import com.rkumarkravi.shopkro.entities.Buyer;
 import com.rkumarkravi.shopkro.repositories.BuyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,19 @@ public class BuyerService implements UserDetailsService {
         return buyerRepository.save(buyer);
     }
 
-    public Buyer updateBuyer(Long id, Buyer updatedBuyer) {
+    public Buyer updateBuyer(Long id, ProfileBuyerDto updatedBuyer) {
         Buyer buyer = getBuyerById(id);
         buyer.setName(updatedBuyer.getName());
         buyer.setEmail(updatedBuyer.getEmail());
         buyer.setGender(updatedBuyer.getGender());
         buyer.setMobNo(updatedBuyer.getMobNo());
+        buyer.setDateOfBirth(updatedBuyer.getDateOfBirth());
         return buyerRepository.save(buyer);
     }
 
     public void deleteBuyer(Long id) {
-        buyerRepository.deleteById(id);
+//        buyerRepository.deleteById(id);
+        buyerRepository.updateStatusById("INACTIVE",id);
     }
 
     @Override

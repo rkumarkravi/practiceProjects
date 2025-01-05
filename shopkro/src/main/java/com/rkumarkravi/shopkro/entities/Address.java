@@ -76,6 +76,7 @@ public class Address {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
+    @JsonBackReference("buyer-address")
     private Buyer buyer; // Buyer associated with this address
 
     @PrePersist

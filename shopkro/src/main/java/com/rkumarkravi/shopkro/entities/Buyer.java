@@ -1,9 +1,6 @@
 package com.rkumarkravi.shopkro.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +10,7 @@ import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -49,7 +47,7 @@ public class Buyer implements UserDetails {
     private String mobNo;
 
     @Column(name = "date_of_birth")
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "status", nullable = false, length = 20)
     private String status; // ACTIVE, INACTIVE, BANNED, etc.
@@ -67,9 +65,11 @@ public class Buyer implements UserDetails {
     private String updatedBy;
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("buyer-address")
     private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "buyer", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("buyer-orders")
     private Set<Order> orders = new LinkedHashSet<>();
 
     @Column(name = "pwd", length = 255)

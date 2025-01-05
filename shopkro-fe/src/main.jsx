@@ -13,6 +13,7 @@ import SellerDashboard from "./main/dashboard/SellerDashboard.jsx";
 import Home from "./main/Home.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import NotFound from "./main/NotFound.jsx";
+import SettingsPage from "./main/Settings.jsx";
 
 // routes.js
 createRoot(document.getElementById("root")).render(
@@ -41,6 +42,7 @@ createRoot(document.getElementById("root")).render(
             }
           />
           <Route path="profile" element={<ProfileForm />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
         {/* <Route path="/profile" element={<ProfileForm />} /> */}
