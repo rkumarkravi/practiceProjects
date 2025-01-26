@@ -8,8 +8,8 @@ dotenv.config();
   // Launch the browser and open a new page
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  const startDate = new Date('2025-03-03'); // Starting date for scheduling posts
-  const daysToAdd = 31; // Number of days to increment for posts
+  const startDate = new Date('2025-11-11'); // Starting date for scheduling posts
+  const daysToAdd = 90; // Number of days to increment for posts
   page.setDefaultTimeout(1000 * 60); // Set default timeout to 1 minute
 
   // Navigate to the Buffer login page
@@ -95,22 +95,22 @@ Ensure the length is suitable for a LinkedIn post and add hashtags relevant to d
     await page.click(schedulePostSelector);
 
     // Select the desired date for scheduling
-    let dateFound = false;
-    while (!dateFound) {
-      try {
-        const dateSelector = `div[aria-label="${selectDate}"]`;
-        console.log(`Selecting date: ${selectDate}`);
-        await page.waitForSelector(dateSelector, { timeout: 5000 });
-        await page.click(dateSelector);
-        dateFound = true;
-      } catch (error) {
-        console.log("Date not found, moving to the next month...");
-        const nextMonthSelector = 
-          "#composer-root > div.sc-hbvSAa.jckDMl > section.publish_section_X-Qjr.publish_clearfix_lkNAD > div > div.publish_stackedButtonsWrapper_uYG0o.publish_buttonsWrapper_bWZJO.schedule-post-button > div > div.sc-hDZrUb.dQXEgL > div > div:nth-child(1) > div > div > div:nth-child(1) > div:nth-child(2) > button";
-        await page.waitForSelector(nextMonthSelector);
-        await page.click(nextMonthSelector);
-      }
+    console.log("Selecting date ...");
+    let currentDate = new Date();
+    let toBeClickOnNextMonth = incrementedDate.getMonth() - currentDate.getMonth();
+    while (toBeClickOnNextMonth > 0) {
+      console.log(`trying ... ${toBeClickOnNextMonth}`);
+      const nextMonthSelector =
+        "#composer-root > div.sc-hbvSAa.jckDMl > section.publish_section_X-Qjr.publish_clearfix_lkNAD > div > div.publish_stackedButtonsWrapper_uYG0o.publish_buttonsWrapper_bWZJO.schedule-post-button > div > div.sc-hDZrUb.dQXEgL > div > div:nth-child(1) > div > div > div:nth-child(1) > div:nth-child(2) > button";
+      await page.waitForSelector(nextMonthSelector);
+      await page.click(nextMonthSelector);
+      toBeClickOnNextMonth--;
     }
+
+    const dateSelector = `div[aria-label="${selectDate}"]`;
+    console.log(`Selecting date: ${selectDate}`);
+    await page.waitForSelector(dateSelector, { timeout: 5000 });
+    await page.click(dateSelector);
 
     // Confirm and finalize scheduling
     const scheduleButtonSelector = 

@@ -9,8 +9,8 @@ dotenv.config();
   // Launch the browser and open a new page
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  const startDate = new Date('2025-08-01'); // Starting date for scheduling posts
-  const daysToAdd = 31; // Number of days to increment for posts
+  const startDate = new Date('2025-12-18'); // Starting date for scheduling posts
+  const daysToAdd = 28; // Number of days to increment for posts
   page.setDefaultTimeout(1000 * 60); // Set default timeout to 1 minute
 
   // Navigate to the Buffer login page
@@ -45,7 +45,7 @@ dotenv.config();
 
     // Attempt to click the "Create Post" button
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000 * 10)); // Wait for 10 seconds
+      await new Promise(resolve => setTimeout(resolve, 1000 * 8)); // Wait for 10 seconds
       const newButtonSelector = "button.publish_base_GTmOA.publish_base_9SxrA.publish_large_D26h7.publish_secondary_-bRVa"; // Primary button selector
       await page.waitForSelector(newButtonSelector, { timeout: 5000 });
       await page.click(newButtonSelector);
@@ -65,8 +65,8 @@ dotenv.config();
 
     const aiTextareaSelector = "textarea[data-testid='ai-assistant-textarea']";
     await page.waitForSelector(aiTextareaSelector);
-    await page.type(aiTextareaSelector, 
-      `Craft a captivating tweet about an intriguing AI topic. Keep it under 270 characters only not more than that, concise yet impactful. Include practical insights, trends, or applications of AI. End with an engaging question or call to action, and add relevant hashtags to boost visibility`
+    await page.type(aiTextareaSelector,
+      `Craft a captivating tweet about an intriguing AI topic in different usecases. Keep it under 270 characters only not more than that, concise yet impactful. Include practical insights, trends, or applications of AI. End with an engaging question or call to action, and add relevant hashtags to boost visibility`
     );
 
     const aiGenerateButtonSelector = "button[data-testid='ai-assistant-generate-button']";
@@ -87,25 +87,27 @@ dotenv.config();
     await page.click(schedulePostSelector);
 
     // Select the desired date for scheduling
-    let dateFound = false;
-    while (!dateFound) {
-      try {
-        const dateSelector = `div[aria-label="${selectDate}"]`;
-        console.log(`Selecting date: ${selectDate}`);
-        await page.waitForSelector(dateSelector, { timeout: 5000 });
-        await page.click(dateSelector);
-        dateFound = true;
-      } catch (error) {
-        console.log("Date not found, moving to the next month...");
-        const nextMonthSelector = 
-          "#composer-root > div.sc-hbvSAa.jckDMl > section.publish_section_X-Qjr.publish_clearfix_lkNAD > div > div.publish_stackedButtonsWrapper_uYG0o.publish_buttonsWrapper_bWZJO.schedule-post-button > div > div.sc-hDZrUb.dQXEgL > div > div:nth-child(1) > div > div > div:nth-child(1) > div:nth-child(2) > button";
-        await page.waitForSelector(nextMonthSelector);
-        await page.click(nextMonthSelector);
-      }
+
+    console.log("Selecting date ...");
+    let currentDate = new Date();
+    let toBeClickOnNextMonth = incrementedDate.getMonth() - currentDate.getMonth();
+    while (toBeClickOnNextMonth > 0) {
+      console.log(`trying ... ${toBeClickOnNextMonth}`);
+      const nextMonthSelector =
+        "#composer-root > div.sc-hbvSAa.jckDMl > section.publish_section_X-Qjr.publish_clearfix_lkNAD > div > div.publish_stackedButtonsWrapper_uYG0o.publish_buttonsWrapper_bWZJO.schedule-post-button > div > div.sc-hDZrUb.dQXEgL > div > div:nth-child(1) > div > div > div:nth-child(1) > div:nth-child(2) > button";
+      await page.waitForSelector(nextMonthSelector);
+      await page.click(nextMonthSelector);
+      toBeClickOnNextMonth--;
     }
 
+    const dateSelector = `div[aria-label="${selectDate}"]`;
+    console.log(`Selecting date: ${selectDate}`);
+    await page.waitForSelector(dateSelector, { timeout: 5000 });
+    await page.click(dateSelector);
+
+
     // Confirm and finalize scheduling
-    const scheduleButtonSelector = 
+    const scheduleButtonSelector =
       `button.publish_base_GTmOA.publish_base_9SxrA.publish_large_D26h7.publish_primary_FQYGy.sc-fbFiXs.eTWMbb`;
     await page.waitForSelector(scheduleButtonSelector);
     await page.click(scheduleButtonSelector);
