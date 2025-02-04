@@ -1,0 +1,41 @@
+
+  .content {
+    padding: 20px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
+  
+  h1, h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .project, .experience {
+    background-color: white;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project a, .experience a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .project a:hover, .experience a:hover {
+    text-decoration: underline;
+  }

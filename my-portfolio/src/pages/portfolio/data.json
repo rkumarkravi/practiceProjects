@@ -1,0 +1,192 @@
+{
+  "basics": {
+    "name": "Ravi Kumar",
+    "email": "er.rkumar96+portfolio@gmail.com",
+    "startYear": "2019-06-10"
+  },
+  "current": {
+    "currentRole": "Full Stack Developer",
+    "companyName": "Spice Money"
+  },
+  "projects": [
+    {
+      "title": "Project One",
+      "description": "A brief description of Project One",
+      "link": "https://github.com/username/project-one"
+    },
+    {
+      "title": "Project Two",
+      "description": "A brief description of Project Two",
+      "link": "https://github.com/username/project-two"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Full Stack Developer",
+      "company": "Tech Corp",
+      "duration": "Jan 2023 - Present",
+      "description": "Worked on building and maintaining web applications"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "CodeWorks",
+      "duration": "Jun 2021 - Dec 2022",
+      "description": "Developed backend services and APIs"
+    }
+  ],
+  "skills": [
+    "javascript",
+    "react",
+    "nodejs",
+    "mongodb",
+    "css",
+    "html",
+    "java",
+    "angular",
+    "spring",
+    "bash",
+    "flutter"
+  ],
+  "extras":{
+    "icons":{
+      "javascript": {
+        "name": "JavaScript",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "react": {
+        "name": "React",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "nodejs": {
+        "name": "Node.js",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "mongodb": {
+        "name": "MongoDB",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "css": {
+        "name": "CSS",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "html": {
+        "name": "Html5",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "java": {
+        "name": "Java",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "angular": {
+        "name": "Angular",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/angular/angular-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "spring": {
+        "name": "Spring Boot",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "bash": {
+        "name": "bash",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "flutter": {
+        "name": "Flutter",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "python": {
+        "name": "Python",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "cpp": {
+        "name": "CPP",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "php": {
+        "name": "PHP",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "rust": {
+        "name": "Rust",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/rust/rust-plain.svg",
+        "height": 50,
+        "width": 50
+      },
+      "go": {
+        "name": "Go",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "swift": {
+        "name": "Swift",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/swift/swift-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "docker": {
+        "name": "Docker",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "kubernetes": {
+        "name": "Kubernetes",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg",
+        "height": 50,
+        "width": 50
+      },
+      "git": {
+        "name": "git",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "tensorflow": {
+        "name": "Tensorflow",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/tensorflow/tensorflow-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "vuejs": {
+        "name": "vuejs",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg",
+        "height": 50,
+        "width": 50
+      },
+      "mysql": {
+        "name": "Mysql",
+        "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg",
+        "height": 50,
+        "width": 50
+      }
+    }    
+  }
+}
